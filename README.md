@@ -8,7 +8,7 @@ PythonPackager can take any Python project and package it into an EXE file so yo
 # How to use
 1. Select your file
 2. Wait, this may take a few minutes.
-3. Open 'dist' folder.
+3. Go to where the unpackaged file was located.
 4. Your packaged file should be there.
 
    # Files
