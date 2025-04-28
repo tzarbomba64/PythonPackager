@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PP README & Downloads Viewer</title>
+  <title>PP viewer ;)</title>
   <style>
     body { background-color: #000; color: #fff; font-family: sans-serif; padding: 2rem; line-height: 1.6; }
     h2 { color: #00aaff; margin-top: 2rem; }
@@ -99,7 +99,7 @@
           if (baseItem) {
             const btn = document.createElement('button');
             btn.className = 'download-btn';
-            btn.innerHTML = `<img src="${winLogoUrl}" alt="Win logo">Download Windows installer`;
+            btn.innerHTML = `<img src="${winLogoUrl}" alt="Windows logo">Download Windows installer`;
             btn.onclick = () => zipAndDownload(baseItem);
             downloadsEl.appendChild(btn);
           }
@@ -110,13 +110,13 @@
       function addEntry(item, zipObj, path = '') {
         if (item.type === 'file') {
           return fetch(item.download_url)
-            .then(res => res.ok ? res.blob() : Promise.reject(res.status))
+            .then(res => (res.ok ? res.blob() : Promise.reject(res.status)))
             .then(blob => zipObj.file(path + item.name, blob));
         } else if (item.type === 'dir') {
           const dir = zipObj.folder(item.name);
           const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${item.path}?ref=${branch}`;
           return fetch(apiUrl, { headers: { 'Accept': 'application/vnd.github.v3+json' } })
-            .then(res => res.ok ? res.json() : Promise.reject(res.status))
+            .then(res => (res.ok ? res.json() : Promise.reject(res.status)))
             .then(children => Promise.all(children.map(child => addEntry(child, dir, path + item.name + '/'))));
         }
       }
@@ -142,3 +142,4 @@
   </script>
 </body>
 </html>
+
